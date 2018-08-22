@@ -1,7 +1,5 @@
 package dragonLore;
 
-import java.util.Random;
-
 public class GameRunner {
 
 	public static void main(String[] args) {
