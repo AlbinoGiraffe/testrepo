@@ -8,9 +8,10 @@ public class Test extends Test2 {
 		Scanner in = new Scanner(System.in);
 		String uin="";
 		while(!uin.equals("quit")) {
-			System.out.print("Text: ");
+			System.out.print("What is your name: ");
 			uin = in.nextLine();
-			System.out.println(uin);
+			System.out.println("Hello, "+uin+"!");
+			System.out.print("How is your day? ")
 		}
 	}
 
