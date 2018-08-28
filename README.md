@@ -6,3 +6,6 @@ A simple text-based game.
 
 # test
 Random testing code.
+
+# Drawing
+Random drawing code.
