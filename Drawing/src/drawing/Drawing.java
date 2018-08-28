@@ -4,12 +4,12 @@ public class Drawing {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		shape();
-//		shape();
-//		rect();
-//		System.out.println("    *    ");
-//		System.out.println("    *    ");
-//		System.out.println("    *    ");
+		shape();
+		shape();
+		rect();
+		System.out.println("    *    ");
+		System.out.println("    *    ");
+		System.out.println("    *    ");
 		System.out.println("p");
 		main(null);
 		
