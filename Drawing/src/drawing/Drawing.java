@@ -11,8 +11,6 @@ public class Drawing {
 		System.out.println("    *    ");
 		System.out.println("    *    ");
 		System.out.println("p");
-		main(null);
-		
 	}
 	
 	public static void rect() {
