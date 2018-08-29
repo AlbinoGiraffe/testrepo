@@ -10,7 +10,6 @@ public class Drawing {
 		System.out.println("    *    ");
 		System.out.println("    *    ");
 		System.out.println("    *    ");
-		System.out.println("p");
 	}
 	
 	public static void rect() {
