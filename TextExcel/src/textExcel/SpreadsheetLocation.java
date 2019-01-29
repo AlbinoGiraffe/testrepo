@@ -10,16 +10,15 @@ public class SpreadsheetLocation implements Location
     public int getRow()
     {
         // TODO Auto-generated method stub
-        return Integer.parseInt(cell.substring(1));
+		System.out.println(Integer.parseInt(cell.substring(1)));
+		return Integer.parseInt(cell.substring(1))-1;
     }
 
     @Override
     public int getCol()
     {
         // TODO Auto-generated method stub
-    	String[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
-    	
-        return Character.toUpperCase(cell.charAt(0));
+    	return cell.charAt(0) - 'A';
     }
     
     public SpreadsheetLocation(String cellName)
