@@ -18,8 +18,10 @@ public class TextExcel
 		while(!(in.equalsIgnoreCase("quit"))) {
 			System.out.print("Command: ");
 			in = uinput.nextLine();
+			sheet1.processCommand(in);
 			System.out.println();
 			
 		}
+		uinput.close();
 	}
 }

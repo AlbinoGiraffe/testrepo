@@ -5,26 +5,30 @@ package textExcel;
 public class SpreadsheetLocation implements Location
 {
     String cell;
+    int row;
+    int col;
     
 	@Override
     public int getRow()
     {
         // TODO Auto-generated method stub
-		System.out.println(Integer.parseInt(cell.substring(1)));
-		return Integer.parseInt(cell.substring(1))-1;
+		return row;
     }
 
     @Override
     public int getCol()
     {
         // TODO Auto-generated method stub
-    	return cell.charAt(0) - 'A';
+    	return col;
     }
     
     public SpreadsheetLocation(String cellName)
     {
         // TODO: Fill this out with your own code
     	cell = cellName;
+    	this.row = Integer.parseInt(cell.substring(1))-1;
+    	this.col = cell.charAt(0) - 'A';
+    	
     }
 
 }
