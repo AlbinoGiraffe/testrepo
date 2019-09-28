@@ -52,7 +52,7 @@ def inverse(f):
 
 # inverse({'a': 1, 'b': 3, 'c': 2})
 # ANSWER: {1: 'a', 2: 'c', 3: 'b'}
-inverse({'a': 2, 'b': 2})
+# inverse({'a': 2, 'b': 2})
 
 
 # class Circle(object):
@@ -80,3 +80,53 @@ inverse({'a': 2, 'b': 2})
 # print(c.area)
 # print(c.contains(4, 5))
 # print(c.contains(-2, 30))
+
+# Representing Intervals
+class Interval(object):
+
+    def __init__(self, a, b):
+        """Create an interval representing [a, b]."""
+        # YOUR CODE HERE
+        self.a = a
+        self.b = b
+
+    @property
+    def length(self):
+        """Returns the length of the interval."""
+        # YOUR CODE HERE
+        return self.b - self.a
+
+    @property
+    def center(self):
+        """Returns the center of the interval."""
+        # YOUR CODE HERE
+        return self.b - ((self.b - self.a) / 2)
+
+    def intersects(self, other):
+        """Returns True/False depending on whether the
+        interval intersects with interval other."""
+        # YOUR CODE HERE
+        return other.a < self.b and self.a < other.b
+# Implementation of length.
+i = Interval(3, 5)
+i.length
+# Implementation of center.
+i = Interval(3, 5)
+i.center
+# Test for intersection
+
+# Non-intersecting.
+i = Interval(3, 5)
+j = Interval(6, 7)
+i.intersects(j)
+j.intersects(i)
+
+# Partial overlap
+k = Interval(4, 6)
+i.intersects(k)
+k.intersects(i)
+
+# Full overlap
+m = Interval(0, 8)
+i.intersects(m)
+m.intersects(i)
