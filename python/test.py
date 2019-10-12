@@ -1,1 +1,1 @@
-print(True)
+print({0:b})
