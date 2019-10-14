@@ -71,25 +71,83 @@ class SparseArrayDict(object):
         return len(self.d)
 
 
-### Exercise: Implement add and sub for `SparseArrayDict`
-
+# Exercise: Implement add and sub for `SparseArrayDict`
 # YOUR CODE HERE
 def sparse_array_dict_add(self, other):
+    b = len(self) if len(self) >= len(other) else len(other)
+    ds = self.default
+    dx = other.default
+    x = 0
+    o = SparseArrayDict(default=self.default, size=b)
+    while x < b:
+        for i in self:
+            if i != ds:
+                try:
+                    if other[x] != dx:
+                        o[x] = i + other[x]
+                        x += 1
+                    else:
+                        o[x] = i + dx
+                        x += 1
+                except:
+                    o[x] = i + dx
+                    x += 1
+            else:
+                try:
+                    if other[x] != dx:
+                        o[x] = other[x] + ds
+                        x += 1
+                    else:
+                        o[x] = ds + dx
+                        x += 1
+                except:
+                    o[x] = ds + dx
+                    x += 1
+    return o
 
 
 def sparse_array_dict_sub(self, other):
-    return None
+    b = len(self) if len(self) >= len(other) else len(other)
+    ds = self.default
+    dx = other.default
+    x = 0
+    o = SparseArrayDict(default=self.default, size=b)
+    while x < b:
+        for i in self:
+            if i != ds:
+                try:
+                    if other[x] != dx:
+                        o[x] = i - other[x]
+                        x += 1
+                    else:
+                        o[x] = i - dx
+                        x += 1
+                except:
+                    o[x] = i - dx
+                    x += 1
+            else:
+                try:
+                    if other[x] != dx:
+                        o[x] = ds - other[x]
+                        x += 1
+                    else:
+                        o[x] = ds - dx
+                        x += 1
+                except:
+                    o[x] = ds - dx
+                    x += 1
+    return o
 
 
 SparseArrayDict.__add__ = sparse_array_dict_add
 SparseArrayDict.__sub__ = sparse_array_dict_sub
 
-### Tests for arrays of the same length
+# Tests for arrays of the same length
 # Let us test this with arrays of the same length first.
 a = SparseArrayDict(1, 3, 4, 5)
 b = SparseArrayDict(5, 4, 3, 2)
 c = a + b
-# assert isinstance(c, SparseArrayDict)
+assert isinstance(c, SparseArrayDict)
 print(c[0], 6)
 print(c[1], 7)
 print(c[3], 7)

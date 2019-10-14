@@ -1,2 +1,5 @@
 # Non-Sparse Arrays
-class UndefinedSizeArray
+class UndefinedSizeArray:
+    def lol(self):
+        return None
+
