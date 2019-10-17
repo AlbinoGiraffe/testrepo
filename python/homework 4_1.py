@@ -75,59 +75,37 @@ class SparseArrayDict(object):
 # YOUR CODE HERE
 def sparse_array_dict_add(self, other):
     b = len(self) if len(self) >= len(other) else len(other)
-    print(self.d)
+    # print(self.d)
     o = SparseArrayDict(default=(self.default + other.default), size=b)
     for i in self.d:
         try:
             o[i] = self.d[i] + other[i]
-        except:
+        except ValueError:
             o[i] = self.d[i] + other.default
 
     for i in other.d:
         try:
             o[i] = other.d[i] + self.d[i]
-        except:
+        except ValueError:
             o[i] = other.d[i] + self.default
-
-    # if len(self) == len(other):
-    #     while x < b:
-    #         for i in self:
-    #             o[x] = i + other[x]
-    #             x += 1
-    # else:
-    #     return None
     return o
+
 
 def sparse_array_dict_sub(self, other):
     b = len(self) if len(self) >= len(other) else len(other)
-    ds = self.default
-    dx = other.default
-    x = 0
-    o = SparseArrayDict(default=self.default, size=b)
-    while x < b:
-        for i in self:
-            if i != ds:
-                try:
-                    if other[x] != dx:
-                        o[x] = i - other[x]
-                        x += 1
-                    else:
-                        o[x] = i - dx
-                        x += 1
-                except:
-                    o[x] = i - dx
-                    x += 1
-            else:
-                try:
-                    if other[x] != dx:
-                        o[x] = ds - other[x]
-                        x += 1
-                    else:
-                        o[x] = ds - dx
-                        x += 1
-                except:
-                    o[x] = ds - dx
-                    x += 1
+    # print(self.d)
+    o = SparseArrayDict(default=(self.default - other.default), size=b)
+    for i in self.d:
+        try:
+            o[i] = self.d[i] - other[i]
+        except ValueError:
+            o[i] = self.d[i] - other.default
+
+    for i in other.d:
+        try:
+            o[i] = self.d[i] - other.d[i]
+        except ValueError:
+            o[i] = self.default - other.d[i]
     return o
 
 
@@ -145,11 +123,10 @@ SparseArrayDict.__sub__ = sparse_array_dict_sub
 # print(c[3], 7)
 # print(a.d.values())
 a = SparseArrayDict(default=1, size=10)
-b = SparseArrayDict(default=2, size=10)
+b = SparseArrayDict(default=2, size=20)
 a[1] = 3
-a[4] = 5
+a[4] = 7
 b[4] = 6
-b[5] = 8
-# print(a.d.keys())
-c = a + b
-print(c)
+b[15] = -2
+c = a - b
+print(c[15])
