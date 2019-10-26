@@ -20,10 +20,7 @@ def derivate(e, x):
 
 
 # Exercise: implementation of value equality
-def variables(e):
-    p = []
-    if len(p)==0:
-
+def variables(e, p=[]):
     if isinstance(e, tuple):
         _, l, r = e
         if isinstance(l, str):
@@ -31,10 +28,9 @@ def variables(e):
         if isinstance(r, str):
             p.append(r)
         if isinstance(l, tuple):
-            variables(l)
+            variables(l, p)
         if isinstance(r, tuple):
-            variables(r)
-        print(p)
+            variables(r, p)
     return set(p)
 
 
@@ -48,8 +44,8 @@ def value_equality(e1, e2, num_samples=1000, tolerance=1e-6):
     # YOUR CODE HERE
     dank = 0
     for i in range(1000):
-      random
-
+        if isinstance(e1, tuple) and isinstance(e2, tuple):
+            op, l, r = e1
 
 
 
@@ -63,6 +59,22 @@ def value_equality(e1, e2, num_samples=1000, tolerance=1e-6):
 # print(derivate(('/', 2, 'x'), 'x'))
 # print(('/', ('-', ('*', 'x', 0), ('*', 2, 1)), ('*', 'x', 'x')))
 
-e = ('*', ('+', 'x', 2), ('/', 'x', 'y'))
-variables(e)
+# e = ('*', ('+', 'x', 2), ('/', 'x', 'y'))
+# print(variables(e))
 # print({'x', 'y'})
+
+### Tests for value equality
+
+e1 = ('+', ('*', 'x', 1), ('*', 'y', 0))
+e2 = 'x'
+print(value_equality(e1, e2))
+# true
+
+e3 = ('/', ('*', 'x', 'x'), ('*', 'x', 1))
+print(value_equality(e1, e3))
+# true
+e4 = ('/', 'y', 2)
+print(value_equality(e1, e4))
+# false
+print(value_equality(e3, e4))
+# false
