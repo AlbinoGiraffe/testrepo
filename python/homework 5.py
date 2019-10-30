@@ -63,21 +63,22 @@ def derivate(e, x):
 # Exercise: implementation of value equality
 def variables(e, p=[]):
     x = p
-    if isinstance(e, tuple):
+    if isinstance(e, str):
+        return {e}
+    elif isinstance(e, tuple):
         _, l, r = e
         if isinstance(l, str):
-            p.append(l)
+            x.append(l)
         if isinstance(r, str):
-            p.append(r)
+            x.append(r)
         if isinstance(l, tuple):
             variables(l, x)
         if isinstance(r, tuple):
             variables(r, x)
-    elif isinstance(e, str):
-        p.append(e)
     return set(x)
 
 
+# Exercise: implementation of value equality
 def value_equality(e1, e2, num_samples=1000, tolerance=1e-6):
     """Return True if the two expressions self and other are numerically
     equivalent.  Equivalence is tested by generating
@@ -86,16 +87,12 @@ def value_equality(e1, e2, num_samples=1000, tolerance=1e-6):
     the values of the two expressions have to be closer than tolerance.
     It can be done in less than 10 lines of code."""
     # YOUR CODE HERE
-    d = variables(e1)
-    c = variables(e2)
-    # print(d)
-    print(c)
-    # for i in range(num_samples):
-    #     r = random.randint(0, num_samples)
-    #     var1 = {element: r for element in variables(e1)}
-    #     var2 = {element: r for element in variables(e2)}
-    #     if abs(compute(e1, var1)-compute(e2, var2)) > tolerance: return False
-    # return True
+    for i in range(num_samples):
+        r = random.gauss(0, 1)
+        var1 = {element: r for element in variables(e1)}
+        var2 = {element: r for element in variables(e2)}
+        if abs(compute(e1, var1) - compute(e2, var2)) > tolerance: return False
+    return True
 
 
 # print(derivate(('+', 'x', 'x'), 'x'))
@@ -111,18 +108,23 @@ def value_equality(e1, e2, num_samples=1000, tolerance=1e-6):
 # print(variables(e))
 # print({'x', 'y'})
 
-### Tests for value equality
+# Tests for value equality
 
 e1 = ('+', ('*', 'x', 1), ('*', 'y', 0))
-e2 = 'x'
+# e2 = 'x'
 # print(value_equality(e1, e2))
 # true
+# print(variables(e1))
+# print(variables(e2))
 
 e3 = ('/', ('*', 'x', 'x'), ('*', 'x', 1))
 print(value_equality(e1, e3))
-# true
-e4 = ('/', 'y', 2)
+# print(variables(e1))
+# print(variables(e3))
+# # true
+# e4 = ('/', 'y', 2)
 # print(value_equality(e1, e4))
 # false
 # print(value_equality(e3, e4))
 # false
+
