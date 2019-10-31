@@ -91,7 +91,8 @@ def value_equality(e1, e2, num_samples=1000, tolerance=1e-6):
         r = random.gauss(0, 1)
         var1 = {element: r for element in variables(e1)}
         var2 = {element: r for element in variables(e2)}
-        if abs(compute(e1, var1) - compute(e2, var2)) > tolerance: return False
+        if abs(compute(e1, var1) - compute(e2, var2)) > tolerance:
+            return False
     return True
 
 
