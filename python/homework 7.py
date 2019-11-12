@@ -317,8 +317,6 @@ def fit(loss, points, params, delta=0.0001, num_iterations=4000):
             vx.assign(x)
             vy.assign(y)
             loss.compute_gradient()
-            for k in params:
-                k.compute_gradient(-loss.value)
             total_loss += loss.value
         if (iteration_idx + 1) % 100 == 0:
             print("Loss:", total_loss)
