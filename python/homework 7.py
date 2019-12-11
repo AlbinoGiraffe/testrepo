@@ -379,4 +379,4 @@ vf = V(0.)
 # YOUR CODE HERE
 oy = va * 2 ** vx + vb * 2 ** -vx + vc * vx * vx * vx + vd * vx * vx + ve * vx + vf
 loss = (vy - oy) * (vy - oy)
-print(fit(loss, points, [va, vb, vc, vd, ve, vf], delta=0.000043, num_iterations=10000))
+print(fit(loss, points, [va, vb, vc, vd, ve, vf], delta=0.0000435, num_iterations=10000))
