@@ -107,7 +107,10 @@ There are various operations that we need to do on clauses, and on the overall S
 
 We first define an auxiliary function, which tells us whether a set contains both an integer and its negative.  This will be used, for instance, to detect whether a clause contains both a literal and its complement.
 """
+# Let us ensure that nose is installed.
 
+from nose.tools import assert_equal, assert_true
+from nose.tools import assert_false, assert_almost_equal
 
 def has_pos_and_neg(l):
     return len(set(l)) > len({abs(x) for x in l})
@@ -200,11 +203,6 @@ def clause_simplify(self, i):
 
 
 Clause.simplify = clause_simplify
-
-# Let us ensure that nose is installed.
-
-from nose.tools import assert_equal, assert_true
-from nose.tools import assert_false, assert_almost_equal
 
 """Here are some tests to help you verify that your implementation works."""
 
@@ -334,9 +332,13 @@ def sat_apply_assignment(self, assignment):
     to be included."""
     # YOUR CODE HERE
     o = set()
+    print(s)
+    print({x.simplify(assignment) for x in self.clauses if not isinstance(x.simplify(assignment), bool)})
     for x in s.clauses:
-        if not x.simplify(assignment):
-            o.add(x)
+        if not isinstance(x.simplify(assignment), bool):
+            o.add(x.simplify(assignment))
+    print("ASSIGN SET", o)
+
     return SAT(o)
     # return SAT({x.simplify(assignment) for x in self.clauses if not isinstance(x.simplify(assignment), bool)})
 
@@ -412,7 +414,7 @@ def sat_solve(self):
         elif not st.isfalse:
             sat_solve(st)
 
-    return sat_solve(st)
+    return {i}
 
 
 SAT.solve = sat_solve
